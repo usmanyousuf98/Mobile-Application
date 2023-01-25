@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_dashboard">
+
+    <fragment
+        android:id="@+id/navigation_dashboard"
+        android:name="com.dsu.final_project.ui.dashboard.DashboardFragment"
+        android:label="@string/title_dashboard"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/navigation_favourites"
+        android:name="com.dsu.final_project.ui.favourites.FavouriteFragment"
+        android:label="@string/title_favourite"
+        tools:layout="@layout/fragment_favourite"
+        />
+
+    <fragment
+        android:id="@+id/navigation_add_records"
+        android:name="com.dsu.final_project.ui.addRecords.AddRecordFragment"
+        android:label="@string/title_add_records"
+        tools:layout="@layout/fragment_add_record" />
+
+    <fragment
+        android:id="@+id/navigation_search"
+        android:name="com.dsu.final_project.ui.search.SearchFragment"
+        android:label="@string/title_search"
+        tools:layout="@layout/fragment_search" />
+
+    <fragment
+        android:id="@+id/navigation_settings"
+        android:name="com.dsu.final_project.ui.settings.SettingsFragment"
+        android:label="@string/title_setting"
+        tools:layout="@layout/fragment_setting" />
+</navigation>

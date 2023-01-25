@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">final_project</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_favourite">Favourite</string>
+    <string name="title_add_records">Add Records</string>
+    <string name="title_search">Search</string>
+    <string name="title_setting">Settings</string>
+</resources>
