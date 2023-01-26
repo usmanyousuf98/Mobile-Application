@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.dsu.final_project.databinding.ItemLikedFavRecBinding
-import com.dsu.final_project.datamodel.Record
+import com.dsu.final_project.model.datamodel.Record
 
 class FavouriteAdapter(private val fav_record:List<Record>):RecyclerView.Adapter<FavouriteAdapter.FavViewHolder>() {
 
@@ -16,8 +16,7 @@ class FavouriteAdapter(private val fav_record:List<Record>):RecyclerView.Adapter
     override fun onBindViewHolder(holder: FavViewHolder, position: Int) {
         val fav_record=fav_record.get(position)
         holder.binding.tvFavName.text=fav_record.name
-        if(!fav_record.isFav)
-            holder.binding.ivIconFav.visibility= View.GONE
+
     }
 
     override fun getItemCount(): Int {

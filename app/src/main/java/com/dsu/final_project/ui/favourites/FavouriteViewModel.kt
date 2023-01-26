@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dsu.final_project.R
-import com.dsu.final_project.datamodel.Record
+import com.dsu.final_project.model.datamodel.Record
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -21,7 +21,7 @@ class FavouriteViewModel: ViewModel() {
             for (i in 0..10){
                 if (i%2==0)
                 {
-                    records.add(Record(R.drawable.ic_baseline_add_24,"Student -$i","Computer science department",true))
+                    records.add(Record(R.drawable.ic_baseline_add_24,"Student -$i","Computer science department"))
                 }
                 else {
                     records.add(
@@ -29,7 +29,7 @@ class FavouriteViewModel: ViewModel() {
                             R.drawable.ic_baseline_add_24,
                             "Student -$i",
                             "Computer science department",
-                            false
+
                         )
                     )
 
