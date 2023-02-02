@@ -1,26 +1,24 @@
 package com.dsu.final_project.model.database
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 import com.dsu.final_project.model.datamodel.Record
 
 @Dao
-interface UserDao {
+interface RecordDao {
     @Query("SELECT * FROM record")
-    suspend fun getAll(): List<Record>
+    fun getAll(): List<Record>
 
-//    @Query("SELECT * FROM user WHERE uid IN (:userIds)")
-//    fun loadAllByIds(userIds: IntArray): List<User>
-//
-//    @Query("SELECT * FROM user WHERE first_name LIKE :first AND " +
-//            "last_name LIKE :last LIMIT 1")
-//    fun findByName(first: String, last: String): User
+    @Query("SELECT * FROM record WHERE id IN (:recordIds)")
+    fun loadAllByIds(recordIds: IntArray): List<Record>
+
+    @Query("SELECT * FROM record WHERE name LIKE :name LIMIT 1")
+    fun findByName(name: String): Record
 
     @Insert
-    suspend fun insertRecord( users: Record)
+    fun insertAll(vararg record: Record)
 
+    @Insert
+    fun insert(record: Record)
     @Delete
-    suspend fun deleteRecord(user: Record)
+    fun delete(record: Record)
 }

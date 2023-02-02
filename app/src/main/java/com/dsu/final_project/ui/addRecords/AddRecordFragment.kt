@@ -1,39 +1,61 @@
 package com.dsu.final_project.ui.addRecords
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.dsu.final_project.databinding.FragmentAddRecordBinding
+import com.dsu.final_project.databinding.RecordFormBinding
+import com.dsu.final_project.model.database.RecordDatabase
+import com.dsu.final_project.model.datamodel.Record
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlin.random.Random
 
-class AddRecordFragment:Fragment() {
-    private var _binding: FragmentAddRecordBinding? = null
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
+class AddRecordFragment: Fragment() {
+    private var _binding: RecordFormBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        val dashboardViewModel =
-            ViewModelProvider(this).get(AddRecordViewModel::class.java)
-
-        _binding = FragmentAddRecordBinding.inflate(inflater, container, false)
+    ): View? {
+        val addRecordViewModel =
+            ViewModelProvider(this).get(AddRecordViewModal::class.java)
+        _binding = RecordFormBinding.inflate(inflater, container, false)
         val root: View = binding.root
+        val writeRecordBtn: Button = binding.btnWriteData
+        writeRecordBtn.setOnClickListener {
+            val addName = binding.etFirstName
+            val addDescription = binding.etDesc
+            if(addName.text!!.isNotBlank()) {
+                val newRecord = Record(
+                    Random.nextInt(0, 10000000),
+                    1,
+                    addName.text.toString(),
+                    addDescription.text.toString(),
+                );
+                GlobalScope.launch(Dispatchers.IO) {
+                    Log.d("In Corutine", "addRecord: ")
+                    val db = RecordDatabase.getInstance(requireContext());
+                    db.recordDao().insert(newRecord)
+                }
 
-        val textView: TextView = binding.textAddRecord
-        dashboardViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+                addName.setText("")
+                addDescription.setText("")
+
+            }
         }
+
+
         return root
     }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
